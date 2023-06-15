@@ -3,7 +3,6 @@ package com.ifmo.kyoto.data_center.service;
 import com.ifmo.kyoto.data_center.util.GetPeopleCountRequester;
 import com.ifmo.kyoto.data_center.util.StartPeopleCountRequester;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -42,6 +41,10 @@ public class PeopleCounterService {
         String timestamp = startPeopleCountRequester.sendRequest();
         timestamps.add(timestamp);
         scheduledExecutorService.schedule(getPeopleCountRequester, 10, TimeUnit.SECONDS);
+    }
+
+    public void decApprovedPeoples() {
+        approvedPeoples.decrementAndGet();
     }
 
 }

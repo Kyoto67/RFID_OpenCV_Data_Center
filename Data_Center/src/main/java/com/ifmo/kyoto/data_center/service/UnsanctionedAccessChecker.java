@@ -1,8 +1,5 @@
 package com.ifmo.kyoto.data_center.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -21,7 +18,7 @@ public class UnsanctionedAccessChecker {
     public void check(int countedPeoples) {
         this.countedPeoples = countedPeoples;
         updatedInfo = true;
-        if (countedPeoples != approvedPeoples.get()) {
+        if (countedPeoples > approvedPeoples.get()) {
             alert = true;
         }
     }
@@ -46,6 +43,6 @@ public class UnsanctionedAccessChecker {
     public boolean getAlertandClear() {
         boolean old = alert;
         alert = false;
-        return alert;
+        return old;
     }
 }

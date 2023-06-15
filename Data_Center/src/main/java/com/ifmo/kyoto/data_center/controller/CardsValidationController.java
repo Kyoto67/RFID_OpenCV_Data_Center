@@ -39,4 +39,9 @@ public class CardsValidationController {
             return new ResponseEntity<>("{\"whilelist\": false}", HttpStatus.OK);
         }
     }
+
+    @PostMapping("exit")
+    public void recordExit() {
+        peopleCounterService.decApprovedPeoples();
+    }
 }

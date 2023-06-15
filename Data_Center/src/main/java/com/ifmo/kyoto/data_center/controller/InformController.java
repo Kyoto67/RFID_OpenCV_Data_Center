@@ -20,7 +20,6 @@ public class InformController {
 
     @GetMapping("get_info")
     public @ResponseBody ResponseEntity getPeoplesInfo() {
-        System.out.println("трахатб");
         UnsanctionedAccessChecker unsanctionedAccessChecker = peopleCounterService.getUnsanctionedAccessChecker();
         while (!unsanctionedAccessChecker.isUpdatedInfo()) {
             try {
@@ -34,7 +33,6 @@ public class InformController {
 
     @GetMapping("get_alert")
     public @ResponseBody ResponseEntity getAlert() {
-        System.out.println("сосихуй");
         UnsanctionedAccessChecker unsanctionedAccessChecker = peopleCounterService.getUnsanctionedAccessChecker();
         while (!unsanctionedAccessChecker.isAlert()) {
             try {
