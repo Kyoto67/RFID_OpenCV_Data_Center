@@ -22,7 +22,7 @@ public class CardsValidationController {
 
     @Autowired
     private LogsService logsService;
-    
+
     @Autowired
     private PeopleCounterService peopleCounterService;
 

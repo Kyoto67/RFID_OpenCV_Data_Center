@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ifmo.cs.kyoto</groupId>
     <artifactId>data-center</artifactId>
-    <version>3.0.0</version>
+    <version>4.0.0</version>
     <name>data-center</name>
     <description>RFID_OpenCV_Data_center</description>
     <properties>
@@ -20,12 +20,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <version>3.1.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
