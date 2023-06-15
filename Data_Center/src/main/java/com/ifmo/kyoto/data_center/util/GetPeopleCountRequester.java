@@ -1,22 +1,20 @@
 package com.ifmo.kyoto.data_center.util;
 
 import com.ifmo.kyoto.data_center.service.UnsanctionedAccessChecker;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Queue;
 
+
 public class GetPeopleCountRequester implements Runnable {
     private String url = "http://localhost:5500/count";
     private Queue<String> timestamps;
+    private UnsanctionedAccessChecker unsanctionedAccessChecker;
 
-    @Autowired
-    UnsanctionedAccessChecker unsanctionedAccessChecker;
-
-    public GetPeopleCountRequester(Queue<String> timestamps) {
+    public GetPeopleCountRequester(Queue<String> timestamps, UnsanctionedAccessChecker checker) {
         this.timestamps = timestamps;
+        this.unsanctionedAccessChecker = checker;
     }
 
 
@@ -24,22 +22,25 @@ public class GetPeopleCountRequester implements Runnable {
     public void run() {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
-        BufferedWriter writer = null;
 
         try {
             URL url = new URL(this.url);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
             connection.setDoOutput(true);
 
-            writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+
+
+            String jsonTimestamp = "{\"id\" : "+ timestamps.poll() + "}";
+
+            try(OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonTimestamp.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String jsonTimestamp = "{\"id\" : \""+ timestamps.poll() + "\"}";
-
-            writer.write(jsonTimestamp);
-
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 StringBuilder stringBuilder = new StringBuilder();
@@ -59,13 +60,6 @@ public class GetPeopleCountRequester implements Runnable {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (writer != null) {
-                try {
-                    writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

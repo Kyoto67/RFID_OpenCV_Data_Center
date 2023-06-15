@@ -1,12 +1,15 @@
 package com.ifmo.kyoto.data_center.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="logs")
 public class Log {
