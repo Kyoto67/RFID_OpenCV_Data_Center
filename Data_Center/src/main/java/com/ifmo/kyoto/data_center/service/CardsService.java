@@ -12,6 +12,6 @@ public class CardsService {
     private CardsRepository cardsRepository;
 
     public boolean checkCardInWhiteList(Card card) {
-        return cardsRepository.existsCardById(card.getId());
+        return cardsRepository.existsCardByHash(card.getHash());
     }
 }

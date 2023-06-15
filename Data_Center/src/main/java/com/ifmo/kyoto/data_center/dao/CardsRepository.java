@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CardsRepository extends JpaRepository<Card, Integer> {
-    boolean existsCardById(Integer id);
+    boolean existsCardByHash(String hash);
 
 }

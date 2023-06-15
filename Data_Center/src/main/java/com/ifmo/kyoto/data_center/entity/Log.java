@@ -1,24 +1,27 @@
 package com.ifmo.kyoto.data_center.entity;
 
-import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import javax.persistence.*;
 import java.util.Date;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="logs")
 public class Log {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idGenerator")
     private Long id;
+
+    private String cardHash;
 
     private Date date;
 
-    public Log() {
+    public Log(String hash) {
+        this.cardHash = hash;
         date = new Date();
     }
 }
