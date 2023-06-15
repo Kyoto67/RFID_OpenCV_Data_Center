@@ -34,9 +34,9 @@ public class CardsValidationController {
         if (cardsService.checkCardInWhiteList(card)) {
             logsService.addLog(new Log(card.getHash()));
             peopleCounterService.startPeopleCount();
-            return new ResponseEntity<>("{\"whilelist\": true}", HttpStatus.OK);
+            return new ResponseEntity<>("{\"whitelist\": true}", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("{\"whilelist\": false}", HttpStatus.OK);
+            return new ResponseEntity<>("{\"whitelist\": false}", HttpStatus.OK);
         }
     }
 
