@@ -34,7 +34,8 @@ public class CardsValidationController {
     @PostMapping("card_check")
     public @ResponseBody ResponseEntity cardCheck(@RequestBody Card card) {
         if (cardsService.checkCardInWhiteList(card)) {
-            logsService.addLog(new Log());
+            logsService.addLog(new Log(card.getHash()));
+            peopleCounterService.startPeopleCount();
             return new ResponseEntity<>("{\"whilelist\": true}", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("{\"whilelist\": false}", HttpStatus.OK);

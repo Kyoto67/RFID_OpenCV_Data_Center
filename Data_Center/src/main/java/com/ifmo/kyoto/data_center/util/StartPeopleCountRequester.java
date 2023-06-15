@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class StartPeopleCountRequester {
 
-    private String url = "http://192.168.24.21:5500";
+    private String url = "http://localhost:5500/count";
 
     public String sendRequest() {
         HttpURLConnection connection = null;

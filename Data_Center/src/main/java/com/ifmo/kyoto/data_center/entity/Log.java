@@ -2,9 +2,7 @@ package com.ifmo.kyoto.data_center.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -14,11 +12,15 @@ import java.util.Date;
 public class Log {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idGenerator")
     private Long id;
+
+    private String cardHash;
 
     private Date date;
 
-    public Log() {
+    public Log(String hash) {
+        this.cardHash = hash;
         date = new Date();
     }
 }

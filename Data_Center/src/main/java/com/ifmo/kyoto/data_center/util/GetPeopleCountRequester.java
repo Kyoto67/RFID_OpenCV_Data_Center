@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Queue;
 
 public class GetPeopleCountRequester implements Runnable {
-    private String url = "http://192.168.24.21:5500";
+    private String url = "http://localhost:5500/count";
     private Queue<String> timestamps;
 
     @Autowired
@@ -36,7 +36,7 @@ public class GetPeopleCountRequester implements Runnable {
             writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            String jsonTimestamp = "{\"timestamp\": " + timestamps.poll() + "}";
+            String jsonTimestamp = "{\"id\" : \""+ timestamps.poll() + "\"}";
 
             writer.write(jsonTimestamp);
 

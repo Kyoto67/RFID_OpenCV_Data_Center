@@ -8,6 +8,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -27,6 +28,7 @@ public class PeopleCounterService {
         approvedPeoples.incrementAndGet();
         String timestamp = startPeopleCountRequester.sendRequest();
         timestamps.add(timestamp);
+        scheduledExecutorService.schedule(getPeopleCountRequester, 10, TimeUnit.SECONDS);
     }
 
 }
