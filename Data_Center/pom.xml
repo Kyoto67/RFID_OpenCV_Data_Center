@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ifmo.cs.kyoto</groupId>
     <artifactId>data-center</artifactId>
-    <version>4.0.5</version>
+    <version>4.1.5</version>
     <name>data-center</name>
     <description>RFID_OpenCV_Data_center</description>
     <properties>
